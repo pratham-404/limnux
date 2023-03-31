@@ -1,0 +1,94 @@
+eval "$(starship init bash)"
+
+grc(){
+	gedit ~/.bashrc ; bash;
+}
+
+chtheme(){
+	echo 'Themes: https://gogh-co.github.io/Gogh/'
+	sleep 10
+	bash -c $(wget -qO- https://git.io/vQgMr) 
+}
+
+quote=`motivate`
+echo $quote
+
+alias f='neofetch ; screenfetch'
+alias nf='neofetch'
+alias sf='screenfetch'
+alias hecker='hollywood'
+alias clear='clear ; echo $quote'
+
+alias pywal='wal -i ~/Pictures/Wallpapers/wallpaper.png'
+
+alias mysqlup="sudo systemctl start mysql"
+alias mysqldown="sudo systemctl stop mysql"
+
+booty(){
+	cd ~/.bootloader
+	sudo ./install.sh
+	cd -
+	clear
+}
+
+mksh(){
+	mkdir temp_script
+	cd ./temp_script
+	
+	for i in '$@'
+	do
+		echo $i
+		echo -e '#!$(which bash)\n'>>$i
+		chmod +x $i
+		mv -i $i ../
+	done
+	
+	cd ..
+	rm -r temp_script
+}
+
+jarvis(){
+	cd .jarvis/edex-ui/
+	npm run start
+}
+
+update(){
+	sudo apt update
+	sudo apt upgrade -y
+	sudo apt full-upgrade -y
+	sudo apt autoremove -y
+	sudo apt autoclean -y
+	clear
+}
+
+c(){
+	s=(${$1//"."/ })
+	l='c'
+	gcc $1 -o $s$l.out
+	./$s$l.out
+}
+
+cpp(){
+	s=(${$1//"."/ })
+	l='cpp'
+	g++ $1 -o $s$l.out
+	./$s$l.out
+}
+
+jva(){
+	javac $1
+	java $1
+}
+
+py(){
+	python3 $1
+}
+
+mkvenv(){
+	python3 -m venv "$PWD/venv"
+	source ./venv/bin/activate
+	
+	touch hello.py
+	echo 'print("Hello, Pratham")' > hello.py
+	py hello.py
+}
